@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import SessionButtom from '@/components/home/session'
 
 const Index = () => {
     return (
@@ -13,6 +14,8 @@ const Index = () => {
                     <Link href="/login" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Iniciar sesión
                     </Link>
+
+                    <SessionButtom/>
                 </div>
                 
                 <div className="mt-2">
