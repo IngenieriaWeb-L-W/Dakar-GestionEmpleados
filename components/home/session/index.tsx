@@ -7,7 +7,7 @@ const index = () => {
         <button onClick={() => {
             signIn('auth0');
         }}>
-            Inicio de Sesión
+            <p className=" dark:text-white">Inicio de Sesión</p>
         </button>
     </div>);
 };

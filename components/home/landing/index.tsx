@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import SessionButtom from '@/components/home/session'
+import SessionButtom from "@/components/home/session";
 
 const Index = () => {
     return (
