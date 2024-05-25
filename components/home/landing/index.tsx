@@ -1,8 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
-import SessionButtom from "@/components/home/session";
+//import Link from 'next/link';
+//import {Session} from "@/components/home/session";
 
-const Index = () => {
+const Landing = () => {
     return (
         <section className="bg-white dark:bg-gray-900">
             <div className="container px-6 py-10 mx-auto text-center">
@@ -11,11 +11,11 @@ const Index = () => {
                     
                 </div>
                 <div className="absolute top-4 right-4">
-                    <Link href="/login" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    {/*<Link href="/login" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Iniciar sesión
-                    </Link>
+                        </Link>*/}
 
-                    <SessionButtom/>
+                    
                 </div>
                 
                 <div className="mt-2">
@@ -39,4 +39,4 @@ const Index = () => {
     );
 }
 
-export default Index;
+export {Landing}

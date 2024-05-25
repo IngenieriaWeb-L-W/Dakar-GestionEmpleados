@@ -91,6 +91,32 @@ model Role {
   users     User[]
 }
 
+model Employee {
+  id            String          @id @default(cuid())
+  firstName     String
+  lastName      String
+  email         String          @unique
+  hireDate      DateTime
+  position      String
+  department    String
+  salary        Float
+  hoursWorked   Int
+  evaluations   Evaluation[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model Evaluation {
+  id            String          @id @default(cuid())
+  employee      Employee        @relation(fields: [employeeId], references: [id])
+  employeeId    String
+  performance   Float
+  comments      String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+
 model VerificationToken {
   identifier String
   token      String   @unique

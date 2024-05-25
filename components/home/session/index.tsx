@@ -2,7 +2,7 @@ import React from "react";
 import {signIn} from "next-auth/react";
 
 
-const index = () => {
+const Session = () => {
     return ( <div>
         <button onClick={() => {
             signIn('auth0');
@@ -12,4 +12,4 @@ const index = () => {
     </div>);
 };
 
-export default index;
+export {Session};
