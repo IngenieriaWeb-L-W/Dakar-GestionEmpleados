@@ -1,41 +1,57 @@
-// pages/employees/[id].tsx
-import { Details } from "@/components/employee/details";
-import axios from 'axios';
-import { EmployeeType } from '@/types/global';
 import { GetServerSideProps } from 'next';
+import { PrismaClient} from '@prisma/client';
+import {Details} from '@/components/employee/details/';
+import React from 'react';
+import { EmployeeType } from '@/types/global';
 
-interface EmployeeDetailsProps {
+type Params = {
+  id: string;
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context;
+  if (!params || !params.id) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const { id } = params as Params;
+  const prisma = new PrismaClient();
+
+  try {
+    const employee = await prisma.employee.findUnique({
+      where: { id },
+    });
+
+    if (!employee) {
+      return {
+        notFound: true,
+      };
+    }
+
+    return {
+      props: { employee },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+interface IndexProps {
   employee: EmployeeType;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  if (!context.params || !context.params.id) {
-    return {
-      notFound: true, // Devolver 404 si no hay parámetros
-    };
-  }
-  const { id } = context.params;
-  try {
-    // Cambia la URL a la que corresponda para obtener los detalles del empleado
-    const response = await axios.get(`/employees/${id}`);
-    return {
-      props: { employee: response.data },
-    };
-  } catch (error) {
-    // Manejar errores de solicitud
-    return {
-      notFound: true, // Devolver 404 si no se puede encontrar el empleado
-    };
-  }
-}
-
-const EmployeeDetails: React.FC<EmployeeDetailsProps> = ({ employee }) => {
+const Index: React.FC<IndexProps> = ({ employee }) => {
   return (
     <div>
-      {/* Renderiza los detalles del empleado */}
       <Details employee={employee} />
     </div>
   );
 };
 
-export default EmployeeDetails;
+export default Index;
