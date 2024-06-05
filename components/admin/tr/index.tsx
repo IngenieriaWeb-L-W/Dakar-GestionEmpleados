@@ -1,10 +1,20 @@
 import React from 'react';
 import { EmployeeType } from '@/types/global'; 
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
+
 
 interface Props {
   employee: EmployeeType;
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      id: context.query.id as string,
+    },
+  };
+};
 
 const Tr = ({ employee }: Props) => {
   const router = useRouter();
