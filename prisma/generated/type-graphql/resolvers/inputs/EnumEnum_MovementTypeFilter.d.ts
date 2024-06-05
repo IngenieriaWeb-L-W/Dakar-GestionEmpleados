@@ -1,0 +1,7 @@
+import { NestedEnumEnum_MovementTypeFilter } from "../inputs/NestedEnumEnum_MovementTypeFilter";
+export declare class EnumEnum_MovementTypeFilter {
+    equals?: "ENTRADA" | "SALIDA" | undefined;
+    in?: Array<"ENTRADA" | "SALIDA"> | undefined;
+    notIn?: Array<"ENTRADA" | "SALIDA"> | undefined;
+    not?: NestedEnumEnum_MovementTypeFilter | undefined;
+}

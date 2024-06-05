@@ -1,0 +1,9 @@
+export { AccountCrudResolver } from "./Account/AccountCrudResolver";
+export { EmployeeCrudResolver } from "./Employee/EmployeeCrudResolver";
+export { EvaluationCrudResolver } from "./Evaluation/EvaluationCrudResolver";
+export { InventoryMovementCrudResolver } from "./InventoryMovement/InventoryMovementCrudResolver";
+export { MaterialCrudResolver } from "./Material/MaterialCrudResolver";
+export { RoleCrudResolver } from "./Role/RoleCrudResolver";
+export { SessionCrudResolver } from "./Session/SessionCrudResolver";
+export { UserCrudResolver } from "./User/UserCrudResolver";
+export { VerificationTokenCrudResolver } from "./VerificationToken/VerificationTokenCrudResolver";

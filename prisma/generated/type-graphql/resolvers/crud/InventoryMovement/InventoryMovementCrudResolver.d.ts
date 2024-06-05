@@ -1,0 +1,35 @@
+import type { GraphQLResolveInfo } from "graphql";
+import { AggregateInventoryMovementArgs } from "./args/AggregateInventoryMovementArgs";
+import { CreateManyInventoryMovementArgs } from "./args/CreateManyInventoryMovementArgs";
+import { CreateOneInventoryMovementArgs } from "./args/CreateOneInventoryMovementArgs";
+import { DeleteManyInventoryMovementArgs } from "./args/DeleteManyInventoryMovementArgs";
+import { DeleteOneInventoryMovementArgs } from "./args/DeleteOneInventoryMovementArgs";
+import { FindFirstInventoryMovementArgs } from "./args/FindFirstInventoryMovementArgs";
+import { FindFirstInventoryMovementOrThrowArgs } from "./args/FindFirstInventoryMovementOrThrowArgs";
+import { FindManyInventoryMovementArgs } from "./args/FindManyInventoryMovementArgs";
+import { FindUniqueInventoryMovementArgs } from "./args/FindUniqueInventoryMovementArgs";
+import { FindUniqueInventoryMovementOrThrowArgs } from "./args/FindUniqueInventoryMovementOrThrowArgs";
+import { GroupByInventoryMovementArgs } from "./args/GroupByInventoryMovementArgs";
+import { UpdateManyInventoryMovementArgs } from "./args/UpdateManyInventoryMovementArgs";
+import { UpdateOneInventoryMovementArgs } from "./args/UpdateOneInventoryMovementArgs";
+import { UpsertOneInventoryMovementArgs } from "./args/UpsertOneInventoryMovementArgs";
+import { InventoryMovement } from "../../../models/InventoryMovement";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateInventoryMovement } from "../../outputs/AggregateInventoryMovement";
+import { InventoryMovementGroupBy } from "../../outputs/InventoryMovementGroupBy";
+export declare class InventoryMovementCrudResolver {
+    aggregateInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: AggregateInventoryMovementArgs): Promise<AggregateInventoryMovement>;
+    createManyInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: CreateManyInventoryMovementArgs): Promise<AffectedRowsOutput>;
+    createOneInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: CreateOneInventoryMovementArgs): Promise<InventoryMovement>;
+    deleteManyInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: DeleteManyInventoryMovementArgs): Promise<AffectedRowsOutput>;
+    deleteOneInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: DeleteOneInventoryMovementArgs): Promise<InventoryMovement | null>;
+    findFirstInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: FindFirstInventoryMovementArgs): Promise<InventoryMovement | null>;
+    findFirstInventoryMovementOrThrow(ctx: any, info: GraphQLResolveInfo, args: FindFirstInventoryMovementOrThrowArgs): Promise<InventoryMovement | null>;
+    inventoryMovements(ctx: any, info: GraphQLResolveInfo, args: FindManyInventoryMovementArgs): Promise<InventoryMovement[]>;
+    inventoryMovement(ctx: any, info: GraphQLResolveInfo, args: FindUniqueInventoryMovementArgs): Promise<InventoryMovement | null>;
+    getInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: FindUniqueInventoryMovementOrThrowArgs): Promise<InventoryMovement | null>;
+    groupByInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: GroupByInventoryMovementArgs): Promise<InventoryMovementGroupBy[]>;
+    updateManyInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: UpdateManyInventoryMovementArgs): Promise<AffectedRowsOutput>;
+    updateOneInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: UpdateOneInventoryMovementArgs): Promise<InventoryMovement | null>;
+    upsertOneInventoryMovement(ctx: any, info: GraphQLResolveInfo, args: UpsertOneInventoryMovementArgs): Promise<InventoryMovement>;
+}

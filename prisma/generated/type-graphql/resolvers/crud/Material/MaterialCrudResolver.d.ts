@@ -1,0 +1,35 @@
+import type { GraphQLResolveInfo } from "graphql";
+import { AggregateMaterialArgs } from "./args/AggregateMaterialArgs";
+import { CreateManyMaterialArgs } from "./args/CreateManyMaterialArgs";
+import { CreateOneMaterialArgs } from "./args/CreateOneMaterialArgs";
+import { DeleteManyMaterialArgs } from "./args/DeleteManyMaterialArgs";
+import { DeleteOneMaterialArgs } from "./args/DeleteOneMaterialArgs";
+import { FindFirstMaterialArgs } from "./args/FindFirstMaterialArgs";
+import { FindFirstMaterialOrThrowArgs } from "./args/FindFirstMaterialOrThrowArgs";
+import { FindManyMaterialArgs } from "./args/FindManyMaterialArgs";
+import { FindUniqueMaterialArgs } from "./args/FindUniqueMaterialArgs";
+import { FindUniqueMaterialOrThrowArgs } from "./args/FindUniqueMaterialOrThrowArgs";
+import { GroupByMaterialArgs } from "./args/GroupByMaterialArgs";
+import { UpdateManyMaterialArgs } from "./args/UpdateManyMaterialArgs";
+import { UpdateOneMaterialArgs } from "./args/UpdateOneMaterialArgs";
+import { UpsertOneMaterialArgs } from "./args/UpsertOneMaterialArgs";
+import { Material } from "../../../models/Material";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateMaterial } from "../../outputs/AggregateMaterial";
+import { MaterialGroupBy } from "../../outputs/MaterialGroupBy";
+export declare class MaterialCrudResolver {
+    aggregateMaterial(ctx: any, info: GraphQLResolveInfo, args: AggregateMaterialArgs): Promise<AggregateMaterial>;
+    createManyMaterial(ctx: any, info: GraphQLResolveInfo, args: CreateManyMaterialArgs): Promise<AffectedRowsOutput>;
+    createOneMaterial(ctx: any, info: GraphQLResolveInfo, args: CreateOneMaterialArgs): Promise<Material>;
+    deleteManyMaterial(ctx: any, info: GraphQLResolveInfo, args: DeleteManyMaterialArgs): Promise<AffectedRowsOutput>;
+    deleteOneMaterial(ctx: any, info: GraphQLResolveInfo, args: DeleteOneMaterialArgs): Promise<Material | null>;
+    findFirstMaterial(ctx: any, info: GraphQLResolveInfo, args: FindFirstMaterialArgs): Promise<Material | null>;
+    findFirstMaterialOrThrow(ctx: any, info: GraphQLResolveInfo, args: FindFirstMaterialOrThrowArgs): Promise<Material | null>;
+    materials(ctx: any, info: GraphQLResolveInfo, args: FindManyMaterialArgs): Promise<Material[]>;
+    material(ctx: any, info: GraphQLResolveInfo, args: FindUniqueMaterialArgs): Promise<Material | null>;
+    getMaterial(ctx: any, info: GraphQLResolveInfo, args: FindUniqueMaterialOrThrowArgs): Promise<Material | null>;
+    groupByMaterial(ctx: any, info: GraphQLResolveInfo, args: GroupByMaterialArgs): Promise<MaterialGroupBy[]>;
+    updateManyMaterial(ctx: any, info: GraphQLResolveInfo, args: UpdateManyMaterialArgs): Promise<AffectedRowsOutput>;
+    updateOneMaterial(ctx: any, info: GraphQLResolveInfo, args: UpdateOneMaterialArgs): Promise<Material | null>;
+    upsertOneMaterial(ctx: any, info: GraphQLResolveInfo, args: UpsertOneMaterialArgs): Promise<Material>;
+}
