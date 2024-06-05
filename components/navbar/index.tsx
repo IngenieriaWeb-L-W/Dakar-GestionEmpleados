@@ -61,13 +61,21 @@ const Navbar = () => {
                 Materials
               </Link>
 
-              <Link
+             {/* <Link
                   onClick={() => router.push('http://localhost:3000/admin')}
                   href='http://localhost:3000/admin'
                   className='block mx-4 mt-4 text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400'
                 >
                   Admin
+  </Link>*/}
+               <Link
+                  onClick={() => router.push('admin')}
+                  href='/admin'
+                  className='block mx-4 mt-4 text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400'
+                >
+                  Admin
                 </Link>
+
               <Session/>
             </div>
           </div>

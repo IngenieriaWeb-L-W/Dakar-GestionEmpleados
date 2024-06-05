@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Navbar } from './navbar';
 import { Footer } from './home/footer';
-//import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-  //const { data: session } = useSession();
-  // Eliminar el console.log para evitar el error "Unexpected console statement"
+const Layout = ({ children }: LayoutProps) => {
+  const { data: session } = useSession();
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log('session', session);
+  }
+
   return (
     <div>
       <Navbar />
