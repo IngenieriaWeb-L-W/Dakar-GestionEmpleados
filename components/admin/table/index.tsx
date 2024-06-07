@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_EMPLOYEES } from '@/utils/graphql/queries/employees'; // Asegúrate de ajustar la ruta según tu estructura de proyecto
-import { EmployeeType } from '@/types/global';
+import { employeeType } from '@/types/global';
 import {Tr} from '@/components/admin/tr'; // Ajusta este componente para empleados
 
 import { useRouter } from 'next/router';
 
 const Table = ({ countEmployees = 0 }) => {
-  const [employees, setEmployees] = useState<EmployeeType[]>([]);
+  const [employees, setEmployees] = useState<employeeType[]>([]);
   const [search, setSearch] = useState('');
   const [auxSearch, setAuxSearch] = useState('');
   const [skip, setSkip] = useState(0);

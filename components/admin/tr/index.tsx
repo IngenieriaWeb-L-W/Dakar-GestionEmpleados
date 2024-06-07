@@ -1,11 +1,11 @@
 import React from 'react';
-import { EmployeeType } from '@/types/global'; 
+import { employeeType } from '@/types/global'; 
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
 
 interface Props {
-  employee: EmployeeType;
+  employee: employeeType;
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -40,7 +40,8 @@ const Tr = ({ employee }: Props) => {
       </td>
       <td className='px-4 py-4 text-sm whitespace-nowrap'>
         <div className='text-gray-500 dark:text-gray-400'>
-          {employee.department}
+        <p className='text-gray-500 dark:text-gray-400'>{employee.department}</p>
+          
         </div>
       </td>
       <td className='px-4 py-4 text-sm whitespace-nowrap'>
