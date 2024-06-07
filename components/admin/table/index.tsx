@@ -12,7 +12,7 @@ const Table = ({ countEmployees = 0 }) => {
   const [auxSearch, setAuxSearch] = useState('');
   const [skip, setSkip] = useState(0);
   const [page, setPage] = useState(1);
-  const PageRelation = 10;
+  const PageRelation = 4;
   const router = useRouter();
   const { loading } = useQuery(GET_EMPLOYEES, {
     variables: {
