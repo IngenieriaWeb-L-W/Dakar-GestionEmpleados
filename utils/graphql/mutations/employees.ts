@@ -16,8 +16,6 @@ export const UPSERT_EMPLOYEE = gql`
       department
       salary
       hoursWorked
-      createdAt
-      updatedAt
     }
   }
 `;

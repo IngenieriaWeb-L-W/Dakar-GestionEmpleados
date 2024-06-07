@@ -20,7 +20,7 @@ const Tr = ({ employee }: Props) => {
   const router = useRouter();
 
   return (
-    <tr>
+    <tr className=''>
       <td className='px-4 py-4 text-sm font-medium whitespace-nowrap'>
         <div>
           <h2 className='font-medium text-gray-800 dark:text-white '>
@@ -40,8 +40,7 @@ const Tr = ({ employee }: Props) => {
       </td>
       <td className='px-4 py-4 text-sm whitespace-nowrap'>
         <div className='text-gray-500 dark:text-gray-400'>
-        <p className='text-gray-500 dark:text-gray-400'>{employee.department}</p>
-          
+          {employee.department}
         </div>
       </td>
       <td className='px-4 py-4 text-sm whitespace-nowrap'>

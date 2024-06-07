@@ -1,71 +1,53 @@
 import React, { useEffect, useState } from 'react';
-//import Select from 'react-select';
 import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
 import { GET_EMPLOYEE } from '@/utils/graphql/queries/employees';
-import { GET_DEPARTMENTS } from '@/utils/graphql/queries/departments';
 import useFormData from '@/hooks/useFormData';
-import {upsertEmployeeTransformation} from '@/utils/graphql/transformations/upsertEmployees';
+import {upsertEmployeesTransformation} from '@/utils/graphql/transformations/upsertEmployees';
 import { UPSERT_EMPLOYEE } from '@/utils/graphql/mutations/employees';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { employeeType } from '@/types/global';
-import { GetServerSideProps } from 'next';
-//import {loading} from '@/components/home/loading';
 import {Loading} from '@/components/Loading';
-export const  getServerSideProps: GetServerSideProps = async (context) => {
+
+export async function getServerSideProps(cxt: any) {
   return {
     props: {
-      id: context.query.id,
+      id: cxt.query.id,
     },
   };
 }
 
-
-
-{/*interface IDepartment {
-    id: string;
-    name: string;
-    description: string;
-  }*/}
-  
-
 const Index = ({ id }: { id: string }) => {
-  //const [options, setOptions] = useState<ICategory[]>([]);
   const [employee, setEmployee] = useState<employeeType>({
+    id: '',
     firstName: '',
     lastName: '',
     email: '',
     hireDate: '',
     position: '',
-    department:'',
+    department: '',
     salary: 0,
     hoursWorked: 0,
-    id: '',
   });
   const { form, formData, updateFormData } = useFormData({});
   const router = useRouter();
-  const { loading: loadingDepartments } = useQuery(GET_DEPARTMENTS);
   const [getEmployee, { loading: loadingLazyQuery }] = useLazyQuery(GET_EMPLOYEE, {
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
-      //console.log(data);
+      console.log(data);
       setEmployee(data.employee);
-      
     },
   });
   const [upsertEmployee] = useMutation(UPSERT_EMPLOYEE);
-  
 
   useEffect(() => {
     if (id !== 'new') getEmployee({ variables: { where: { id } } });
-  }, [id]);
+  }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    //console.log(formData);
-    const { dataCreate, dataUpdate } = upsertEmployeeTransformation({
-      formdata: { ...formData, department: formData.department || employee.department },
-    });
+    console.log(formData);
+    const { dataCreate, dataUpdate } = upsertEmployeesTransformation({ formdata: formData });
     await upsertEmployee({
       variables: {
         where: {
@@ -85,10 +67,11 @@ const Index = ({ id }: { id: string }) => {
       });
   };
 
-  if (loadingDepartments || loadingLazyQuery) return <Loading />;
+  
+  if (loadingLazyQuery) return <Loading />;
   return (
     <div>
-      <section className='p-6 mx-auto bg-white shadow-md dark:bg-gray-800'>
+      <section className='p-6 mx-auto bg-white  shadow-md dark:bg-gray-800'>
         <h2 className='text-lg font-semibold text-gray-700 capitalize dark:text-white'>
           Editar: {employee.firstName} {employee.lastName}
         </h2>
@@ -180,8 +163,8 @@ const Index = ({ id }: { id: string }) => {
                 </label>
                 <input
                   id='salary'
-                  name='salary'
                   type='number'
+                  name='salary'
                   defaultValue={employee.salary}
                   className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
                 />
@@ -193,8 +176,8 @@ const Index = ({ id }: { id: string }) => {
                 </label>
                 <input
                   id='hoursWorked'
-                  name='hoursWorked'
                   type='number'
+                  name='hoursWorked'
                   defaultValue={employee.hoursWorked}
                   className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
                 />

@@ -3,12 +3,10 @@ import ReactLoading from 'react-loading';
 
 const Loading = () => {
   return (
-    <div className='relative w-screen h-screen bg-black bg-opacity-25'>
-      <div className='absolute inset-y-0 left-0 z-10 w-full h-full'>
-        <ReactLoading type='bars' color='#000000' height={'20%'} width={'20%'} />
-      </div>
+    <div className='flex items-center justify-center w-screen h-screen bg-black bg-opacity-25'>
+      <ReactLoading type='spin' color='#000000' height={'20%'} width={'20%'} />
     </div>
   );
 };
 
-export {Loading};
+export { Loading };

@@ -2,8 +2,13 @@
 import { gql } from '@apollo/client';
 
 const GET_EMPLOYEES = gql`
-  query Employees($take: Int, $skip: Int) {
-    employees(take: $take, skip: $skip) {
+  query Employees(
+    $where: EmployeeWhereInput
+    $orderBy: [EmployeeOrderByWithRelationInput!]
+    $take: Int
+    $skip: Int
+  ) {
+    employees(where: $where, orderBy: $orderBy, take: $take, skip: $skip) {
       id
       firstName
       lastName
@@ -18,8 +23,8 @@ const GET_EMPLOYEES = gql`
 `;
 
 const GET_EMPLOYEE = gql`
-  query Employee($id: String!) {
-    employee(id: $id) {
+  query Employee($where: EmployeeWhereUniqueInput!) {
+    employee(where: $where) {
       id
       firstName
       lastName

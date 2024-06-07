@@ -10,26 +10,17 @@ interface IFormdata {
 }
 
 interface Iprops {
-  formdata: IFormdata;
+  formdata: IFormdata;  
 }
 
-const upsertEmployeeTransformation = ({ formdata }: Iprops) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    hireDate,
-    position,
-    department,
-    salary,
-    hoursWorked,
-  } = formdata;
+const upsertEmployeesTransformation = ({ formdata }: Iprops) => {
+  const { firstName, lastName, email, hireDate, position, department, salary, hoursWorked } = formdata;
 
   const dataCreate = {
     firstName: firstName,
     lastName: lastName,
     email: email,
-    hireDate: new Date(hireDate),
+    hireDate: new Date(hireDate),  // Asegúrate de que el formato de la fecha sea correcto
     position: position,
     department: department,
     salary: parseFloat(salary),
@@ -47,7 +38,7 @@ const upsertEmployeeTransformation = ({ formdata }: Iprops) => {
       set: email,
     },
     hireDate: {
-      set: new Date(hireDate),
+      set: new Date(hireDate),  // Asegúrate de que el formato de la fecha sea correcto
     },
     position: {
       set: position,
@@ -66,4 +57,4 @@ const upsertEmployeeTransformation = ({ formdata }: Iprops) => {
   return { dataCreate, dataUpdate };
 };
 
-export {upsertEmployeeTransformation};
+export {upsertEmployeesTransformation};
