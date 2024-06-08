@@ -2,7 +2,10 @@ import React from 'react';
 import { employeeType } from '@/types/global'; 
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
-
+import { useMutation } from '@apollo/client';
+import { DELETE_EMPLOYEE } from '@/utils/graphql/mutations/employees';
+import Modal from '@/components/admin/modal';
+import { toast } from 'react-toastify';
 
 interface Props {
   employee: employeeType;
@@ -18,6 +21,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const Tr = ({ employee }: Props) => {
   const router = useRouter();
+  const [deleteEmployee, {loading}] = useMutation(DELETE_EMPLOYEE);
+  const[open, setOpen]=React.useState(false);
+  const handleClose = () => setOpen(false);
+  
+  const handleSubmit = async (id: any) => {
+    await deleteEmployee({
+      variables: { where: { id } },
+    }).then(() => {
+      toast.success('Employee  deleted successfully!');
+      router.reload();
+      setOpen(false);
+    });
+  };
 
   return (
     <tr className=''>
@@ -73,8 +89,31 @@ const Tr = ({ employee }: Props) => {
             />
           </svg>
         </button>
-      </td>
+        <button
+        onClick={() => {
+          setOpen(true);
+          
+        }
+        }
+        className='px-1 py-1  text-white transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100'>
+          <i
+          className='iconify w-10 h-10 text-white'
+          data-icon='icon-park:delete'
+          />
+        </button>
+        </td>
+        <Modal
+        open={open}
+        setOpen={setOpen}
+        handleClose={handleClose}
+        handleSubmit={() => {
+          handleSubmit(employee.id);
+        } } 
+        //loading={false}          
+        loading = {loading}
+          />
     </tr>
+    
   );
 };
 

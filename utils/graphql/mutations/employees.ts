@@ -19,3 +19,19 @@ export const UPSERT_EMPLOYEE = gql`
     }
   }
 `;
+
+export const DELETE_EMPLOYEE = gql`
+  mutation DeleteOneEmployee($where: EmployeeWhereUniqueInput!) {
+    deleteOneEmployee(where: $where) {
+      id
+    }
+  }
+`;
+
+export const CREATE_MANY_EMPLOYEES = gql`
+  mutation Mutation($data: [EmployeeCreateManyInput!]!) {
+    createManyEmployee(data: $data) {
+      count
+    }
+  }
+`;
