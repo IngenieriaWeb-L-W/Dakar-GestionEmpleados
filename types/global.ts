@@ -15,3 +15,10 @@ export interface Maestro {
   id: number;
   name: string;
 }
+
+export interface Movimiento {
+  id: number;
+  fecha: string;
+  cantidad: number;
+  ejecutor: string;
+}

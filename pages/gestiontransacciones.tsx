@@ -1,6 +1,7 @@
+// pages/gestiontransacciones.tsx
 import { useState } from 'react';
 import Dropdown from '@/components/gestiontransacciones/dropdown';
-import MaestroDetails from '@/components/gestiontransacciones/maestrodetails'; // Asegúrate de que la ruta sea correcta
+import MaestroDetails from '@/components/gestiontransacciones/maestrodetails';
 import { Maestro } from '@/types/global';
 
 const maestros: Maestro[] = [
@@ -15,7 +16,6 @@ const GestionDeTransacciones: React.FC = () => {
 
   const handleSelect = (maestro: Maestro) => {
     setSelectedMaestro(maestro);
-    // Aquí puedes agregar cualquier lógica adicional al seleccionar un maestro
   };
 
   return (
@@ -23,9 +23,7 @@ const GestionDeTransacciones: React.FC = () => {
       <h1>Gestión de Transacciones</h1>
       <Dropdown maestros={maestros} onSelect={handleSelect} />
       <div>
-        <h2>Maestro seleccionado:</h2>
         <MaestroDetails maestro={selectedMaestro} />
-        {/* Aquí puedes agregar la lógica para mostrar la información del maestro seleccionado */}
       </div>
     </div>
   );
