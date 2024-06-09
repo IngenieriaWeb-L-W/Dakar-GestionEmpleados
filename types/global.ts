@@ -9,3 +9,9 @@ export type employeeType = {
   salary: number;
   hoursWorked: number;
 };
+
+
+export interface Maestro {
+  id: number;
+  name: string;
+}

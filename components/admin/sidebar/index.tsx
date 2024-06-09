@@ -1,3 +1,4 @@
+// components/Sidebar.tsx
 import React from "react";
 import Link from 'next/link';
 import Image from "next/image";
@@ -16,11 +17,16 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ user }) => {
   const { data: session } = useSession();
-  const currentUser = user || session?.user;
+  const currentUser: User = {
+    name: user?.name ?? session?.user?.name ?? 'Usuario',
+    email: user?.email ?? session?.user?.email ?? '',
+    image: user?.image ?? session?.user?.image ?? '',
+    rol: user?.rol ?? session?.user?.rol ?? ''
+  };
 
   return (
     <div className="bg-gray-800 text-white h-screen w-64 flex flex-col items-center p-4">
-      {currentUser && currentUser.image ? (
+      {currentUser.image ? (
         <Image
           src={currentUser.image}
           alt="User Avatar"
@@ -37,9 +43,9 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
           />
         </div>
       )}
-      <div className="text-lg">{currentUser?.name || 'Usuario'}</div>
+      <div className="text-lg">{currentUser.name}</div>
       
-      <Link href="/transactions" className="text-white hover:text-gray-400 mt-4">
+      <Link href="/gestiontransacciones" className="text-white hover:text-gray-400 mt-4">
         Transacciones
       </Link>
       
@@ -47,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
         Maestros
       </Link>
       
-      {currentUser && currentUser.rol === 'ADMIN' && (
+      {currentUser.rol === 'ADMIN' && (
         <Link href="/usuarios" className="text-white hover:text-gray-400 mt-4">
           Usuarios
         </Link>
