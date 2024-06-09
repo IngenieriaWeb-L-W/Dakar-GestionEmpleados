@@ -5,6 +5,7 @@ import MaestroDetails from '@/components/gestiontransacciones/maestrodetails';
 import Dialog from '@/components/gestiontransacciones/dialogo'; 
 import { Maestro } from '@/types/global';
 import { useRouter } from 'next/router';
+import Dashboard from '@/components/gestiontransacciones/dashboard';
 
 const maestros: Maestro[] = [
   { id: 1, name: 'Gestión de la información del empleado' },
@@ -60,6 +61,8 @@ const GestionDeTransacciones: React.FC = () => {
 
             {/* Diálogo para agregar un nuevo movimiento */}
             {isDialogOpen && <Dialog onClose={closeDialog} />}
+
+            <Dashboard/>
     </div>
   );
 
