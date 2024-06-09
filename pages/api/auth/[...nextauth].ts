@@ -4,7 +4,6 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/config/prisma';
 
-
 const options: NextAuthOptions = {
   providers: [
     Auth0Provider({
@@ -17,6 +16,21 @@ const options: NextAuthOptions = {
   ],
   secret: process.env.AUTH0_CLIENT_SECRET,
   adapter: PrismaAdapter(prisma),
+  callbacks: {
+    async session({ session, user }) {
+      // Agrega el rol del usuario a la sesión
+      const userFromDb = await prisma.user.findUnique({
+        where: { email: user.email },
+        include: { role: true },
+      });
+
+      if (userFromDb && userFromDb.role) {
+        session.user.rol = userFromDb.role.name;
+      }
+
+      return session;
+    },
+  },
 };
 
 export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options);
