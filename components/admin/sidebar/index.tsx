@@ -15,6 +15,8 @@ interface SidebarProps {
   user?: User;
 }
 
+
+
 const Sidebar: React.FC<SidebarProps> = ({ user }) => {
   const { data: session } = useSession();
   const currentUser: User = {
@@ -36,26 +38,27 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
         />
       ) : (
         <div className="w-24 h-24 mb-4 bg-gray-700 rounded-full flex items-center justify-center">
-          <img
+          <Image
             className='object-cover w-24 h-24 mx-2 rounded-full'
             src='https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
             alt='avatar'
+            
           />
         </div>
       )}
       <div className="text-lg">{currentUser.name}</div>
       
       <Link href="/gestiontransacciones" className="text-white hover:text-gray-400 mt-4">
-        Transacciones
+      Transactions
       </Link>
       
-      <Link href="/masters" className="text-white hover:text-gray-400 mt-4">
-        Maestros
+      <Link href="/maestro" className="text-white hover:text-gray-400 mt-4">
+      Employee Master
       </Link>
       
       {currentUser.rol === 'ADMIN' && (
         <Link href="/usuarios" className="text-white hover:text-gray-400 mt-4">
-          Usuarios
+          Users
         </Link>
       )}
     </div>

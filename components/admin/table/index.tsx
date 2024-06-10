@@ -1,12 +1,39 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_EMPLOYEES } from '@/utils/graphql/queries/employees'; // Asegúrate de ajustar la ruta según tu estructura de proyecto
+import { GET_EMPLOYEES, } from '@/utils/graphql/queries/employees';
 import { employeeType } from '@/types/global';
 import {Tr} from '@/components/admin/tr'; // Ajusta este componente para empleados
 
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
-const Table = ({ countEmployees = 0 }) => {
+
+
+interface User {
+  name?: string;
+  email?: string;
+  image?: string;
+  rol?: string;  // Asegúrate de que el tipo User incluye `rol`
+}
+
+interface TableProps {
+  countEmployees?: number;
+  user?: User;
+}
+
+
+const Table: React.FC<TableProps> = ({ countEmployees = 0, user }) => {
+
+  const { data: session } = useSession();
+
+  const currentUser: User = {
+    name: user?.name ?? session?.user?.name ?? 'Usuario',
+    email: user?.email ?? session?.user?.email ?? '',
+    image: user?.image ?? session?.user?.image ?? '',
+    rol: user?.rol ?? session?.user?.rol ?? ''
+  };
+  
+  
   const [employees, setEmployees] = useState<employeeType[]>([]);
   const [search, setSearch] = useState('');
   const [auxSearch, setAuxSearch] = useState('');
@@ -91,7 +118,7 @@ const Table = ({ countEmployees = 0 }) => {
               <span>Import</span>
             </button>
 
-            <button
+            {currentUser.rol === 'ADMIN' && (<button
               onClick={() => {
                 router.push('/admin/employees/new');
               }}
@@ -113,7 +140,7 @@ const Table = ({ countEmployees = 0 }) => {
               </svg>
 
               <span> Add Employee</span>
-            </button>
+            </button>)}
           </div>
         </div>
 
