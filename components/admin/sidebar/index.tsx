@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
       </Link>
       
       {currentUser.rol === 'ADMIN' && (
-        <Link href="/usuarios" className="text-white hover:text-gray-400 mt-4">
+        <Link href="/users" className="text-white hover:text-gray-400 mt-4">
           Users
         </Link>
       )}

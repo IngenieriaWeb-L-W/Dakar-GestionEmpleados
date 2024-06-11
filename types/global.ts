@@ -22,3 +22,11 @@ export interface Movimiento {
   cantidad: number;
   ejecutor: string;
 }
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  image: string; // Asegúrate de que esta propiedad esté definida
+  roleId: string;  // Asegúrate de que esta propiedad esté definida
+}
