@@ -64,7 +64,7 @@ const UserForm = ({ id }: { id: string }) => {
     } catch (error: unknown) { // Usamos 'unknown' para capturar el error y luego hacer una verificación de tipo
       if (error instanceof Error) {
         toast.error('Error saving user');
-        console.error(error.message);
+        //console.error(error.message);
       }
     }
   };
