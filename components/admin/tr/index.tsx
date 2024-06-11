@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { useMutation } from '@apollo/client';
 import { DELETE_EMPLOYEE } from '@/utils/graphql/mutations/employees';
-import Modal from '@/components/admin/modal';
+import {BasicModal} from '@/components/admin/modal';
 import { toast } from 'react-toastify';
 
 interface Props {
@@ -25,7 +25,7 @@ const Tr = ({ employee }: Props) => {
   const[open, setOpen]=React.useState(false);
   const handleClose = () => setOpen(false);
   
-  const handleSubmit = async (id: any) => {
+  const handleSubmit = async (id: string) => {
     await deleteEmployee({
       variables: { where: { id } },
     }).then(() => {
@@ -102,7 +102,7 @@ const Tr = ({ employee }: Props) => {
           />
         </button>
         </td>
-        <Modal
+        <BasicModal
         open={open}
         setOpen={setOpen}
         handleClose={handleClose}

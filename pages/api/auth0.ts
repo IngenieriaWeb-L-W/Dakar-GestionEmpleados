@@ -1,8 +1,9 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
 import { options } from '@/pages/api/auth/[...nextauth]';
 import { createUserAuth0, getAuth0Token } from '@/utils/api';
 
-const Auth0 = async (req: any, res: any) => {
+const Auth0 = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const session = await getServerSession(req, res, options);
     const { data } = req.body;
@@ -15,13 +16,15 @@ const Auth0 = async (req: any, res: any) => {
         data.connection = 'Username-Password-Authentication';
         userData = await createUserAuth0(data, accessToken, tokenType).then((resUser) => resUser);
       } catch (error) {
-        req.status(409).json({ error: `Error getting token ${error}` });
+        res.status(409).json({ error: `Error getting token ${error}` });
+        return; // Return para evitar ejecución adicional del código
       }
       if (!Object.keys(userData).includes('statusCode')) {
         // send welcome email
-        return res.status(200).json({ usuario: userData });
+        res.status(200).json({ usuario: userData });
+      } else {
+        res.status(userData.statusCode).json({ error: userData.message, data: userData });
       }
-      return res.status(userData.statusCode).json({ error: userData.message, data: userData });
     } else {
       res.status(401).json({ error: 'Unauthorized' });
     }

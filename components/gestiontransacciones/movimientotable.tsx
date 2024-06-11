@@ -33,4 +33,4 @@ const MovimientosTable: React.FC<MovimientosTableProps> = ({ movimientos }) => {
   );
 };
 
-export default MovimientosTable;
+export {MovimientosTable};

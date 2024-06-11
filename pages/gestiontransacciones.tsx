@@ -4,7 +4,7 @@ import Dropdown from '@/components/gestiontransacciones/dropdown';
 import MaestroDetails from '@/components/gestiontransacciones/maestrodetails';
 import Dialog from '@/components/gestiontransacciones/dialogo'; 
 import { Maestro } from '@/types/global';
-import { useRouter } from 'next/router';
+
 import Dashboard from '@/components/gestiontransacciones/dashboard';
 
 const maestros: Maestro[] = [
@@ -16,7 +16,7 @@ const maestros: Maestro[] = [
 
 const GestionDeTransacciones: React.FC = () => {
   const [selectedMaestro, setSelectedMaestro] = useState<Maestro>(maestros[0]);
-  const router = useRouter();
+  
 
   const handleSelect = (maestro: Maestro) => {
     setSelectedMaestro(maestro);

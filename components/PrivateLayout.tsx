@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useSession, signIn } from 'next-auth/react';
 
-const PrivateLayout = ({ children }: any) => {
+interface PrivateLayoutProps {
+  children: ReactNode;
+}
+
+const PrivateLayout = ({ children }: PrivateLayoutProps) => {
   const { status } = useSession();
 
   if (status === 'loading') {
@@ -14,4 +18,4 @@ const PrivateLayout = ({ children }: any) => {
   return <div>{children}</div>;
 };
 
-export {PrivateLayout};
+export { PrivateLayout };

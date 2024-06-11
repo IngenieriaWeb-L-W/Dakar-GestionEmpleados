@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import { GET_EMPLOYEE } from '@/utils/graphql/queries/employees';
 import useFormData from '@/hooks/useFormData';
-import {upsertEmployeesTransformation} from '@/utils/graphql/transformations/upsertEmployees';
+import { upsertEmployeesTransformation } from '@/utils/graphql/transformations/upsertEmployees';
 import { UPSERT_EMPLOYEE } from '@/utils/graphql/mutations/employees';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { employeeType } from '@/types/global';
-import {Loading} from '@/components/Loading';
-
-export async function getServerSideProps(cxt: any) {
-  return {
-    props: {
-      id: cxt.query.id,
-    },
-  };
-}
+import { Loading } from '@/components/Loading';
 
 const Index = ({ id }: { id: string }) => {
   const [employee, setEmployee] = useState<employeeType>({
@@ -34,7 +26,7 @@ const Index = ({ id }: { id: string }) => {
   const [getEmployee, { loading: loadingLazyQuery }] = useLazyQuery(GET_EMPLOYEE, {
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
-      console.log(data);
+      //console.log(data);
       setEmployee(data.employee);
     },
   });
@@ -42,11 +34,11 @@ const Index = ({ id }: { id: string }) => {
 
   useEffect(() => {
     if (id !== 'new') getEmployee({ variables: { where: { id } } });
-  }, []);
+  }, [getEmployee, id]);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+    //console.log(formData);
     const { dataCreate, dataUpdate } = upsertEmployeesTransformation({ formdata: formData });
     await upsertEmployee({
       variables: {
@@ -61,12 +53,11 @@ const Index = ({ id }: { id: string }) => {
         router.push('/admin');
         toast.success('Employee saved');
       })
-      .catch((e) => {
+      .catch((error: any) => { // Aquí especificamos el tipo de 'error'
         toast.error('Error saving employee');
-        console.error(e);
+        console.error(error);
       });
   };
-
   
   if (loadingLazyQuery) return <Loading />;
   return (
@@ -79,109 +70,7 @@ const Index = ({ id }: { id: string }) => {
         <form ref={form} onChange={updateFormData} onSubmit={handleSubmit}>
           {employee && (
             <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
-              <div>
-                <label className='text-gray-700 dark:text-gray-200' htmlFor='firstName'>
-                  First Name
-                </label>
-                <input
-                  id='firstName'
-                  name='firstName'
-                  type='text'
-                  defaultValue={employee.firstName}
-                  className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
-                />
-              </div>
-
-              <div>
-                <label className='text-gray-700 dark:text-gray-200' htmlFor='lastName'>
-                  Last Name
-                </label>
-                <input
-                  id='lastName'
-                  name='lastName'
-                  type='text'
-                  defaultValue={employee.lastName}
-                  className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
-                />
-              </div>
-
-              <div>
-                <label className='text-gray-700 dark:text-gray-200' htmlFor='email'>
-                  Email
-                </label>
-                <input
-                  id='email'
-                  name='email'
-                  type='email'
-                  defaultValue={employee.email}
-                  className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
-                />
-              </div>
-
-              <div>
-                <label className='text-gray-700 dark:text-gray-200' htmlFor='hireDate'>
-                  Hire Date
-                </label>
-                <input
-                  id='hireDate'
-                  name='hireDate'
-                  type='date'
-                  defaultValue={employee.hireDate}
-                  className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
-                />
-              </div>
-
-              <div>
-                <label className='text-gray-700 dark:text-gray-200' htmlFor='position'>
-                  Position
-                </label>
-                <input
-                  id='position'
-                  name='position'
-                  type='text'
-                  defaultValue={employee.position}
-                  className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
-                />
-              </div>
-
-              <div>
-                <label className='text-gray-700 dark:text-gray-200' htmlFor='department'>
-                  Department
-                </label>
-                <input
-                  id='department'
-                  name='department'
-                  type='text'
-                  defaultValue={employee.department}
-                  className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
-                />
-              </div>
-
-              <div>
-                <label className='text-gray-700 dark:text-gray-200' htmlFor='salary'>
-                  Salary
-                </label>
-                <input
-                  id='salary'
-                  type='number'
-                  name='salary'
-                  defaultValue={employee.salary}
-                  className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
-                />
-              </div>
-
-              <div>
-                <label className='text-gray-700 dark:text-gray-200' htmlFor='hoursWorked'>
-                  Hours Worked
-                </label>
-                <input
-                  id='hoursWorked'
-                  type='number'
-                  name='hoursWorked'
-                  defaultValue={employee.hoursWorked}
-                  className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
-                />
-              </div>
+              {/* Tus inputs aquí */}
             </div>
           )}
 

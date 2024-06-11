@@ -1,13 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
-import {Loading }from '@/components/Loading';
+import { Loading } from '@/components/Loading';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -26,9 +24,7 @@ interface BasicModalProps {
   loading: boolean;
 }
 
-export default function BasicModal({ open, setOpen, handleClose, handleSubmit, loading}: BasicModalProps) {
-  const router = useRouter();
-
+export const BasicModal: React.FC<BasicModalProps> = ({ open, setOpen, handleClose, handleSubmit, loading }) => {
   return (
     <div>
       <Modal
@@ -45,28 +41,31 @@ export default function BasicModal({ open, setOpen, handleClose, handleSubmit, l
             Esta acción no se puede deshacer.
           </Typography>
           <div className='flex justify-start mt-6'>
-            {loading?(
-                <Loading/>
+            {loading ? (
+              <Loading />
             ) : (
-                <div>
-                   <button
-                        type='button'
-                        onClick={() => handleSubmit()}
-                        className='px-8 py-2.5 mx-5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'
-                        >
-                        Delete
-                    </button>
-                    <button
-                        onClick={() => setOpen(false)}
-                        className='px-8 py-2.5 mx-5 leading-5 text-gray-700 transition-colors duration-300 transform bg-white rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'
-                        >
-                        Cancel
-                    </button>
-                </div>
+              <div>
+                <button
+                  type='button'
+                  onClick={handleSubmit}
+                  className='px-8 py-2.5 mx-5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={() => setOpen(false)}
+                  className='px-8 py-2.5 mx-5 leading-5 text-gray-700 transition-colors duration-300 transform bg-white rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'
+                >
+                  Cancel
+                </button>
+              </div>
             )}
           </div>
         </Box>
       </Modal>
     </div>
   );
-}
+};
+
+export default BasicModal
+

@@ -43,4 +43,4 @@ const BalanceChart: React.FC<BalanceChartProps> = ({ data }) => {
   return <Line data={chartData} options={options} />;
 };
 
-export default BalanceChart;
+export {BalanceChart};

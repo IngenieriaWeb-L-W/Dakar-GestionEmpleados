@@ -131,4 +131,4 @@ const MaestroDetails: React.FC<MaestroDetailsProps> = ({ maestro }) => {
   );
 };
 
-export default MaestroDetails;
+export {MaestroDetails};

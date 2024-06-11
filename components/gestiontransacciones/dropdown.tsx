@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Maestro } from '@/types/global'; // Asegúrate de que la ruta sea correcta
+import React, { useState } from 'react';
+import { Maestro } from '@/types/global'; 
 
 interface DropdownProps {
   maestros: Maestro[];
@@ -42,13 +42,13 @@ const Dropdown: React.FC<DropdownProps> = ({ maestros, onSelect }) => {
           className="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800"
         >
           {maestros.map((maestro) => (
-            <a
+            <button
               key={maestro.id}
               onClick={() => handleSelect(maestro)}
               className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform cursor-pointer dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               {maestro.name}
-            </a>
+            </button>
           ))}
         </div>
       )}
@@ -56,4 +56,4 @@ const Dropdown: React.FC<DropdownProps> = ({ maestros, onSelect }) => {
   );
 };
 
-export default Dropdown;
+export { Dropdown };

@@ -103,4 +103,4 @@ const Dialog: React.FC<DialogProps> = ({ onClose }) => {
   );
 };
 
-export default Dialog;
+export  {Dialog};

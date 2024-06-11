@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import BalanceChart from './balancechart';
+import {BalanceChart} from './balancechart';
 
 interface BalanceData {
   date: string;
@@ -40,4 +40,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export {Dashboard};
