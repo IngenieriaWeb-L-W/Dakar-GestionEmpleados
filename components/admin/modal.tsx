@@ -66,6 +66,3 @@ export const BasicModal: React.FC<BasicModalProps> = ({ open, setOpen, handleClo
     </div>
   );
 };
-
-export default BasicModal
-
