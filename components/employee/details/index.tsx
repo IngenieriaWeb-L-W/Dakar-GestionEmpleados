@@ -1,9 +1,9 @@
 // components/employee/details/Details.tsx
 import React from 'react';
-import { EmployeeType } from '@/types/global';
+import { employeeType } from '@/types/global';
 
 interface DetailsProps {
-  employee: EmployeeType;
+  employee: employeeType;
 }
 
 const Details: React.FC<DetailsProps> = ({ employee }) => {
