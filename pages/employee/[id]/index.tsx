@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { PrismaClient} from '@prisma/client';
 import {Details} from '@/components/employee/details/';
 import React from 'react';
-import { EmployeeType } from '@/types/global';
+import { employeeType } from '@/types/global';
 
 type Params = {
   id: string;
@@ -43,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 interface IndexProps {
-  employee: EmployeeType;
+  employee: employeeType;
 }
 
 const Index: React.FC<IndexProps> = ({ employee }) => {
